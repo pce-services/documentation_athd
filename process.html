@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation des Processus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .process-list {
+            background-color: white;
+            padding: 20px;
+            width: 250px;
+            overflow-y: auto;
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #ccc;
+        }
+
+        .process {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .process h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        /* Style pour le processus actif */
+        .active-process {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        /* Style de la barre de recherche */
+        .search-bar {
+            width: calc(100% - 20px); /* Pour éviter que la barre ne touche les bords */
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .viewer {
+            background-color: white;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            flex-grow: 1;
+            border: none;
+        }
+
+        /* Nouveau style pour le bouton */
+        .fullscreen-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 16px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10000;
+        }
+
+        .fullscreen-button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fullscreen-iframe {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Consultation des Processus</h1>
+    </header>
+
+    <div class="main-content">
+        <section id="processListSection" class="process-list">
+            <input type="text" class="search-bar" placeholder="Rechercher ..." onkeyup="filterProcesses()">
+
+            <h2>Liste des Processus</h2>
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22C5RBs43oDa-KdzZeNtuy%22%7D')">
+                <h3>RBAL</h3>
+                <p>Emilie / Allan / Piqueteurs / Etude / Mairie / Client</p>
+            </div>
+            <!-- Ajoutez d'autres processus ici -->
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22-bz5pBXUraXOW-JGvx7X%22%7D')">
+                <h3>Piquetage</h3>
+                <p>Etude / Allan / Piqueteurs</p>
+            </div>
+
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22nvWq-ywrFKCNWqNVVhzS%22%7D')">
+                <h3>Aiguillage</h3>
+                <p>Etude / Allan / Aiguilleurs</p>
+            </div>
+
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22sN0Bce-aW_eybuLagiyw%22%7D')">
+                <h3>COMAC</h3>
+                <p>Jean / STT</p>
+            </div>
+
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22H4H7NZoL3p8GH_ts1y1E%22%7D')">
+                <h3>CA</h3>
+                <p>Jean / STT</p>
+            </div>
+
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22qcXJKmqVo8DtNCKewQfE%22%7D')">
+                <h3>CAPFT</h3>
+                <p>Jean / STT</p>
+            </div>
+        </section>
+
+        <section class="viewer">
+            <h2 style="margin-bottom: 20px;">Visionneuse de Processus</h2>
+            <iframe id="processViewer" src="" title="Visionneuse de Processus"></iframe>
+            <button id="fullscreenButton" class="fullscreen-button" onclick="toggleFullScreen()">Plein écran</button>
+        </section>
+    </div>
+
+    <script>
+        function showProcess(element, processUrl) {
+            // Retirer la classe 'active-process' de tous les processus
+            var processes = document.querySelectorAll('.process');
+            processes.forEach(function (process) {
+                process.classList.remove('active-process');
+            });
+
+            // Ajouter la classe 'active-process' au processus cliqué
+            element.classList.add('active-process');
+
+            // Mettre à jour l'iframe avec l'URL du processus sélectionné
+            const viewer = document.getElementById('processViewer');
+            viewer.src = processUrl;
+        }
+
+        function filterProcesses() {
+            var input = document.querySelector('.search-bar');
+            var filter = input.value.toLowerCase();
+            var processes = document.querySelectorAll('.process');
+
+            processes.forEach(function (process) {
+                var title = process.querySelector('h3').textContent.toLowerCase();
+                var description = process.querySelector('p').textContent.toLowerCase();
+
+                if (title.includes(filter) || description.includes(filter)) {
+                    process.style.display = '';
+                } else {
+                    process.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleFullScreen() {
+            const header = document.querySelector('header');
+            const processListSection = document.getElementById('processListSection');
+            const viewer = document.getElementById('processViewer');
+            const fullscreenButton = document.getElementById('fullscreenButton');
+            const isFullscreen = viewer.classList.contains('fullscreen-iframe');
+
+            if (isFullscreen) {
+                // Sortir du mode plein écran
+                header.classList.remove('hidden');
+                processListSection.classList.remove('hidden');
+                viewer.classList.remove('fullscreen-iframe');
+                fullscreenButton.textContent = 'Plein écran';
+            } else {
+                // Passer en mode plein écran
+                header.classList.add('hidden');
+                processListSection.classList.add('hidden');
+                viewer.classList.add('fullscreen-iframe');
+                fullscreenButton.textContent = 'Mode normal';
+            }
+        }
+    </script>
+</body>
+
+</html>
