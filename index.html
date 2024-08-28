@@ -21,6 +21,25 @@
             background-color: #333;
             color: white;
             padding: 10px 0;
+            position: relative;
+        }
+
+        .info-icon {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0; /* Supprime le padding pour garantir une forme circulaire */
+            width: 40px; /* Largeur égale à la hauteur pour un cercle parfait */
+            height: 40px; /* Hauteur égale à la largeur pour un cercle parfait */
+            border-radius: 50%; /* Bordure arrondie à 50% pour un cercle */
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .main-content {
@@ -52,16 +71,14 @@
             font-size: 16px;
         }
 
-        /* Style pour le processus actif */
         .active-process {
             background-color: #007bff;
             color: white;
             border-color: #0056b3;
         }
 
-        /* Style de la barre de recherche */
         .search-bar {
-            width: calc(100% - 20px); /* Pour éviter que la barre ne touche les bords */
+            width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 20px;
             font-size: 16px;
@@ -85,7 +102,6 @@
             border: none;
         }
 
-        /* Nouveau style pour le bouton */
         .fullscreen-button {
             position: absolute;
             bottom: 20px;
@@ -118,12 +134,51 @@
             z-index: 9999;
             background-color: white;
         }
+
+        /* Styles pour le carré en haut à droite */
+        .legend-box {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 500px;
+            height: 500px;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 10000;
+            padding: 10px;
+        }
+
+        .legend-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Animation pour l'affichage du carré */
+        .legend-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
 <body>
     <header>
         <h1>Consultation des Processus</h1>
+        <button class="info-icon" onclick="toggleLegendBox()">i</button>
     </header>
 
     <div class="main-content">
@@ -167,7 +222,6 @@
             </div>
         </section>
 
-
         <section class="viewer">
             <h2 style="margin-bottom: 20px;">Visionneuse de Processus</h2>
             <iframe id="processViewer" src="" title="Visionneuse de Processus"></iframe>
@@ -175,18 +229,19 @@
         </section>
     </div>
 
+    <!-- Le carré en haut à droite pour la légende -->
+    <div id="legendBox" class="legend-box">
+        <iframe src="https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22ykLh4wjUlywryAWN2gGK%22%7D" title="Légende"></iframe>
+    </div>
+
     <script>
         function showProcess(element, processUrl) {
-            // Retirer la classe 'active-process' de tous les processus
             var processes = document.querySelectorAll('.process');
             processes.forEach(function (process) {
                 process.classList.remove('active-process');
             });
 
-            // Ajouter la classe 'active-process' au processus cliqué
             element.classList.add('active-process');
-
-            // Mettre à jour l'iframe avec l'URL du processus sélectionné
             const viewer = document.getElementById('processViewer');
             viewer.src = processUrl;
         }
@@ -216,18 +271,21 @@
             const isFullscreen = viewer.classList.contains('fullscreen-iframe');
 
             if (isFullscreen) {
-                // Sortir du mode plein écran
                 header.classList.remove('hidden');
                 processListSection.classList.remove('hidden');
                 viewer.classList.remove('fullscreen-iframe');
                 fullscreenButton.textContent = 'Plein écran';
             } else {
-                // Passer en mode plein écran
                 header.classList.add('hidden');
                 processListSection.classList.add('hidden');
                 viewer.classList.add('fullscreen-iframe');
                 fullscreenButton.textContent = 'Mode normal';
             }
+        }
+
+        function toggleLegendBox() {
+            const legendBox = document.getElementById('legendBox');
+            legendBox.classList.toggle('show');
         }
     </script>
 </body>
