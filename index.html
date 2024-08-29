@@ -31,10 +31,10 @@
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 0; /* Supprime le padding pour garantir une forme circulaire */
-            width: 40px; /* Largeur égale à la hauteur pour un cercle parfait */
-            height: 40px; /* Hauteur égale à la largeur pour un cercle parfait */
-            border-radius: 50%; /* Bordure arrondie à 50% pour un cercle */
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
             font-size: 18px;
             display: flex;
@@ -150,10 +150,10 @@
             padding: 10px;
         }
 
-        .legend-box iframe {
+        .legend-box img {
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: contain;
         }
 
         /* Animation pour l'affichage du carré */
@@ -186,37 +186,37 @@
             <input type="text" class="search-bar" placeholder="Rechercher ..." onkeyup="filterProcesses()">
 
             <h2>Liste des Processus</h2>
-            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22C5RBs43oDa-KdzZeNtuy%22%7D')">
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22C5RBs43oDa-KdzZeNtuy%22%7D')">
                 <h3>RBAL</h3>
                 <p>Emilie / Allan / Piqueteurs / Etude / Mairie / Client</p>
             </div>
             <!-- Ajoutez d'autres processus ici -->
-            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22-bz5pBXUraXOW-JGvx7X%22%7D')">
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22-bz5pBXUraXOW-JGvx7X%22%7D')">
                 <h3>Piquetage</h3>
                 <p>Etude / Allan / Piqueteurs</p>
             </div>
 
-            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22nvWq-ywrFKCNWqNVVhzS%22%7D')">
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22nvWq-ywrFKCNWqNVVhzS%22%7D')">
                 <h3>Aiguillage</h3>
                 <p>Etude / Allan / Aiguilleurs</p>
             </div>
 
-            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22sN0Bce-aW_eybuLagiyw%22%7D')">
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22sN0Bce-aW_eybuLagiyw%22%7D')">
                 <h3>COMAC</h3>
                 <p>Jean / STT</p>
             </div>
 
-            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22H4H7NZoL3p8GH_ts1y1E%22%7D')">
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22H4H7NZoL3p8GH_ts1y1E%22%7D')">
                 <h3>CA</h3>
                 <p>Jean / STT</p>
             </div>
 
-            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22qcXJKmqVo8DtNCKewQfE%22%7D')">
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22qcXJKmqVo8DtNCKewQfE%22%7D')">
                 <h3>CAPFT</h3>
                 <p>Jean / STT</p>
             </div>
 
-            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22v7uMyj4L1NFeidFsAXZt%22%7D')">
+            <div class="process" onclick="showProcess(this, 'https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22v7uMyj4L1NFeidFsAXZt%22%7D')">
                 <h3>PRO</h3>
                 <p>Etude / Travaux</p>
             </div>
@@ -231,10 +231,7 @@
 
     <!-- Le carré en haut à droite pour la légende -->
     <div id="legendBox" class="legend-box">
-        <iframe 
-  src="https://viewer.diagrams.net/?fit=1#G1oBMqR3xouYJ36ptEQzG7xZDV6qHcVXXQ#%7B%22pageId%22%3A%22ykLh4wjUlywryAWN2gGK%22%7D" 
-  width="100%" 
-  height="600px" title="Légende"></iframe>
+        <img src="images/legende.jpg" alt="Légende">
     </div>
 
     <script>
